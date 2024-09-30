@@ -7,6 +7,10 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -28,5 +32,21 @@ public class SpringSecurityConfig {
         httpSecurity.sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return httpSecurity.build();
 
+    }
+
+     /* Enable getting users from the database for authentication,
+     * For us to be able to utilise the UserDetailService which is an interface, we have to create a class that implements it, or just use inbuilt
+     * implementations
+     * */
+    //Using in memory users to login
+    @Bean
+    public UserDetailsService userDetailsService(){
+        UserDetails user1 = User
+                .withDefaultPasswordEncoder()
+                .username("user1")
+                .password("user12345")
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(user1);
     }
 }
