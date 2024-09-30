@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: spring-security-deep-dive
+  security:
+    user:
+      name: mwas
+      password: mwas12345
+
