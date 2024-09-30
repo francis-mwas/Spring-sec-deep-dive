@@ -3,6 +3,8 @@ package com.fram.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -39,7 +41,7 @@ public class SpringSecurityConfig {
      * implementations
      * */
     //Using in memory users to login
-    @Bean
+ /*   @Bean
     public UserDetailsService userDetailsService(){
         UserDetails user1 = User
                 .withDefaultPasswordEncoder()
@@ -48,5 +50,12 @@ public class SpringSecurityConfig {
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user1);
+    }*/
+    //using users coming from the database
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        return daoAuthenticationProvider;
     }
 }

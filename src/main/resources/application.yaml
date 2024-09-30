@@ -5,4 +5,8 @@ spring:
     user:
       name: mwas
       password: mwas12345
-
+  datasource:
+    url: jdbc:postgresql://localhost:5430/Bills-management
+    username: postgres
+    password: mwas
+    driver-class-name: org.postgresql.Driver
